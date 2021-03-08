@@ -13,5 +13,5 @@ cmd=(
 for x in "${cmd[@]}"
 do
     echo $ $x
-    $x
+    $x ||exit 1
 done
