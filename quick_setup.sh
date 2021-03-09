@@ -51,7 +51,7 @@ if sudo true ; then
 	do
     	echo: $x
 	done
-
+fi
 
 for x in "${cmd[@]}"
 do
