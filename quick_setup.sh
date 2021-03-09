@@ -9,6 +9,11 @@ help () {
 
 virtualenv=1
 
+if [ whoami == root ]; then
+	sudo="sudo"
+fi
+
+
 while getopts "vh" o ; do
 	case "${o}" in
 		v)
@@ -29,7 +34,7 @@ done
 
 if [ $virtualenv -eq 1 ]; then
 cmd=(
-    'python3 -m pip install virtualenv'
+    "$sudo apt install virtualenv python3-pip"
     'virtualenv .'
     'source bin/activate'
     'python3 -m pip install Flask'
