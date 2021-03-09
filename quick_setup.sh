@@ -13,7 +13,6 @@ if [ whoami != root ]; then
 	sudo="sudo"
 fi
 
-
 while getopts "vh" o ; do
 	case "${o}" in
 		v)
@@ -45,6 +44,14 @@ cmd=(
 	'python3 -m pip install Flask'
 )
 fi
+
+if sudo true ; then 
+	echo "This script needs sudo or to be root, please type this command on root or relaunch it with sudo activate:"
+	for x in "${cmd[@]}"
+	do
+    	echo: $x
+	done
+
 
 for x in "${cmd[@]}"
 do
