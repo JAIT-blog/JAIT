@@ -9,10 +9,6 @@ help () {
 
 virtualenv=1
 
-if [ whoami != root ]; then
-	sudo="sudo"
-fi
-
 while getopts "vh" o ; do
 	case "${o}" in
 		v)
@@ -45,12 +41,19 @@ cmd=(
 )
 fi
 
-if sudo true ; then 
-	echo "This script needs sudo or to be root, please type this command on root or relaunch it with sudo activate:"
-	for x in "${cmd[@]}"
-	do
-    	echo: $x
-	done
+if [ $(whoami) != "root" ]; then
+	sudo true 2>/dev/null
+	if [ $? -ne 0 ]  ; then 
+		echo -e "This script needs sudo or to be root, please type this command on root or relaunch it with sudo activate:\n"
+
+		echo cd $PWD
+		for x in "${cmd[@]}"
+		do
+    		echo $x
+		done
+		exit 1
+	fi
+	sudo="sudo"
 fi
 
 for x in "${cmd[@]}"
