@@ -9,7 +9,7 @@ help () {
 
 virtualenv=1
 
-if [ whoami == root ]; then
+if [ whoami != root ]; then
 	sudo="sudo"
 fi
 
