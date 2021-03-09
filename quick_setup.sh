@@ -45,12 +45,6 @@ if [ $(whoami) != "root" ]; then
 	sudo true 2>/dev/null
 	if [ $? -ne 0 ]  ; then 
 		echo -e "This script needs sudo or to be root, please type this command on root or relaunch it with sudo activate:\n"
-
-		echo cd $PWD
-		for x in "${cmd[@]}"
-		do
-    		echo $x
-		done
 		exit 1
 	fi
 	sudo="sudo"
