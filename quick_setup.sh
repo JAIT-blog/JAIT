@@ -56,8 +56,8 @@ echo -e '\nInstall finished\n'
 
 if [ $virtualenv -eq 1 ]; then	
 	echo For launch Flask, do :
-	echo ./bin/activate
-	echo Flask run
+	echo source bin/activate
+	echo flask run
 	echo -e '\nTo leave virtualenv, do:'
 	echo deactivate
 else
