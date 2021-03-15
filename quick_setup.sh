@@ -27,20 +27,6 @@ while getopts "vh" o ; do
 	esac
 done
 
-if [ $virtualenv -eq 1 ]; then
-cmd=(
-    "$sudo apt install virtualenv python3-pip"
-    'virtualenv .'
-    'source bin/activate'
-    'python3 -m pip install Flask'
-    'deactivate'
-)
-else
-cmd=(
-	'python3 -m pip install Flask'
-)
-fi
-
 if [ $(whoami) != "root" ]; then
 	sudo true 2>/dev/null
 	if [ $? -ne 0 ]  ; then 
@@ -49,6 +35,21 @@ if [ $(whoami) != "root" ]; then
 	fi
 	sudo="sudo"
 fi
+
+if [ $virtualenv -eq 1 ]; then
+cmd=(
+    "$sudo apt install virtualenv python3-pip"
+    'virtualenv .'
+    'source bin/activate'
+    "$sudo python3 -m pip install -r ./requirement.txt"
+    'deactivate'
+)
+else
+cmd=(
+	'python3 -m pip install requirement.txt'
+)
+fi
+
 
 for x in "${cmd[@]}"
 do
